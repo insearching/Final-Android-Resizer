@@ -31,7 +31,6 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 public class ImageProcessor {
 	
-	private static final float LDPI_RATIO=3;
 	private static final float MDPI_RATIO=4;
 	private static final float TVDPI_RATIO=5.33333333f;
 	private static final float HDPI_RATIO=6;
@@ -67,9 +66,7 @@ public class ImageProcessor {
 	private static int getRequiredSize(String originalSize, String resFolder,
 			int width) {
 		float destRatio=1;
-		if(resFolder.equalsIgnoreCase("ldpi"))
-			destRatio=LDPI_RATIO;
-		else if(resFolder.equalsIgnoreCase("mdpi"))
+		if(resFolder.equalsIgnoreCase("mdpi"))
 			destRatio=MDPI_RATIO;
 		else if(resFolder.equalsIgnoreCase("tvdpi"))
 			destRatio=TVDPI_RATIO;
@@ -83,9 +80,7 @@ public class ImageProcessor {
 			destRatio=XXXHDPI_RATIO;
 		
 		float origRatio=1;
-		if(originalSize.equalsIgnoreCase("ldpi"))
-			origRatio=LDPI_RATIO;
-		else if(originalSize.equalsIgnoreCase("mdpi"))
+		if(originalSize.equalsIgnoreCase("mdpi"))
 			origRatio=MDPI_RATIO;
 		else if(originalSize.equalsIgnoreCase("tvdpi"))
 			origRatio=TVDPI_RATIO;

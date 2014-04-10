@@ -45,16 +45,13 @@ import javax.swing.border.TitledBorder;
 
 public class ResizerFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel_1;
 	private JLabel lblResourcesDirectory;
 	private JButton btnBrowse;
 	private JLabel lblNoDirectorySelected;
-	private JLabel lblDragYourImages;
-	private JPanel panel_2;
-	private JLabel lblDragYourImages_1;
-	private JPanel panel_3;
-	private JLabel lblNewLabel;
+
 	private JPanel panel_4;
 	private JLabel lblDragDrop;
 
@@ -79,10 +76,9 @@ public class ResizerFrame extends JFrame {
 	 */
 	File resFile = null;
 	private JLabel lblInputDensity;
-	private JComboBox inputDensity;
+	private JComboBox<String> inputDensity;
 	private JCheckBox ch_xxxhdpi;
 	private JCheckBox ch_tvdpi;
-	private JCheckBox ch_ldpi;
 	private JCheckBox ch_mdpi;
 	private JCheckBox ch_hdpi;
 	private JCheckBox ch_xhdpi;
@@ -108,15 +104,6 @@ public class ResizerFrame extends JFrame {
 				0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		ch_ldpi = new JCheckBox("ldpi");
-		ch_ldpi.setSelected(true);
-		GridBagConstraints gbc_ch_ldpi = new GridBagConstraints();
-		gbc_ch_ldpi.insets = new Insets(0, 0, 5, 5);
-		gbc_ch_ldpi.anchor = GridBagConstraints.NORTHWEST;
-		gbc_ch_ldpi.gridx = 0;
-		gbc_ch_ldpi.gridy = 0;
-		panel.add(ch_ldpi, gbc_ch_ldpi);
-
 		ch_mdpi = new JCheckBox("mdpi");
 		ch_mdpi.setSelected(true);
 		ch_mdpi.setHorizontalAlignment(SwingConstants.LEFT);
@@ -124,7 +111,7 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_mdpi.anchor = GridBagConstraints.WEST;
 		gbc_ch_mdpi.insets = new Insets(0, 0, 5, 5);
 		gbc_ch_mdpi.gridx = 0;
-		gbc_ch_mdpi.gridy = 1;
+		gbc_ch_mdpi.gridy = 0;
 		panel.add(ch_mdpi, gbc_ch_mdpi);
 
 		ch_tvdpi = new JCheckBox("tvdpi");
@@ -132,7 +119,7 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_tvdpi.anchor = GridBagConstraints.WEST;
 		gbc_ch_tvdpi.insets = new Insets(0, 0, 5, 5);
 		gbc_ch_tvdpi.gridx = 0;
-		gbc_ch_tvdpi.gridy = 2;
+		gbc_ch_tvdpi.gridy = 1;
 		panel.add(ch_tvdpi, gbc_ch_tvdpi);
 
 		ch_hdpi = new JCheckBox("hdpi");
@@ -141,7 +128,7 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_hdpi.anchor = GridBagConstraints.WEST;
 		gbc_ch_hdpi.insets = new Insets(0, 0, 5, 5);
 		gbc_ch_hdpi.gridx = 0;
-		gbc_ch_hdpi.gridy = 3;
+		gbc_ch_hdpi.gridy = 2;
 		panel.add(ch_hdpi, gbc_ch_hdpi);
 
 		ch_xhdpi = new JCheckBox("xhdpi");
@@ -150,7 +137,7 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_xhdpi.anchor = GridBagConstraints.WEST;
 		gbc_ch_xhdpi.insets = new Insets(0, 0, 5, 5);
 		gbc_ch_xhdpi.gridx = 0;
-		gbc_ch_xhdpi.gridy = 4;
+		gbc_ch_xhdpi.gridy = 3;
 		panel.add(ch_xhdpi, gbc_ch_xhdpi);
 
 		ch_xxhdpi = new JCheckBox("xxhdpi");
@@ -159,15 +146,8 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_xxhdpi.anchor = GridBagConstraints.WEST;
 		gbc_ch_xxhdpi.insets = new Insets(0, 0, 5, 5);
 		gbc_ch_xxhdpi.gridx = 0;
-		gbc_ch_xxhdpi.gridy = 5;
+		gbc_ch_xxhdpi.gridy = 4;
 		panel.add(ch_xxhdpi, gbc_ch_xxhdpi);
-
-		ch_xxxhdpi = new JCheckBox("xxxhdpi");
-		GridBagConstraints gbc_ch_xxxhdpi = new GridBagConstraints();
-		gbc_ch_xxxhdpi.insets = new Insets(0, 0, 5, 5);
-		gbc_ch_xxxhdpi.gridx = 0;
-		gbc_ch_xxxhdpi.gridy = 6;
-		panel.add(ch_xxxhdpi, gbc_ch_xxxhdpi);
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder("Options"));
@@ -222,16 +202,15 @@ public class ResizerFrame extends JFrame {
 		gbc_lblInputDensity.gridy = 1;
 		panel_1.add(lblInputDensity, gbc_lblInputDensity);
 
-		Vector comboBoxItems = new Vector();
-		comboBoxItems.add("ldpi");
+		Vector<String> comboBoxItems = new Vector<String>();
 		comboBoxItems.add("mdpi");
 		comboBoxItems.add("hdpi");
 		comboBoxItems.add("xhdpi");
 		comboBoxItems.add("xxhdpi");
-		final DefaultComboBoxModel model = new DefaultComboBoxModel(
+		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
 				comboBoxItems);
-		inputDensity = new JComboBox(model);
-		inputDensity.setSelectedIndex(4);
+		inputDensity = new JComboBox<String>(model);
+		inputDensity.setSelectedIndex(comboBoxItems.size()-1);
 		GridBagConstraints gbc_inputDensity = new GridBagConstraints();
 		gbc_inputDensity.insets = new Insets(0, 0, 0, 5);
 		gbc_inputDensity.fill = GridBagConstraints.HORIZONTAL;
@@ -303,9 +282,6 @@ public class ResizerFrame extends JFrame {
 
 	private Vector<String> getExportFolders() {
 		Vector<String> ret = new Vector<String>();
-
-		if (ch_ldpi.isSelected())
-			ret.add("ldpi");
 
 		if (ch_mdpi.isSelected())
 			ret.add("mdpi");
