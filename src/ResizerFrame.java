@@ -19,6 +19,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
  * */
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -64,6 +65,7 @@ public class ResizerFrame extends JFrame {
 				try {
 					ResizerFrame frame = new ResizerFrame();
 					frame.setVisible(true);
+					frame.setMinimumSize(new Dimension(640, 480));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -97,7 +99,7 @@ public class ResizerFrame extends JFrame {
 		panel.setBorder(new TitledBorder("Export"));
 		contentPane.add(panel, BorderLayout.WEST);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 56, 0 };
+		gbl_panel.columnWidths = new int[] { 70, 0 };
 		gbl_panel.rowHeights = new int[] { 23, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0 };
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -148,6 +150,15 @@ public class ResizerFrame extends JFrame {
 		gbc_ch_xxhdpi.gridx = 0;
 		gbc_ch_xxhdpi.gridy = 4;
 		panel.add(ch_xxhdpi, gbc_ch_xxhdpi);
+		
+		ch_xxxhdpi = new JCheckBox("xxxhdpi");
+		ch_xxxhdpi.setSelected(true);
+		GridBagConstraints gbc_ch_xxxhdpi = new GridBagConstraints();
+		gbc_ch_xxxhdpi.anchor = GridBagConstraints.WEST;
+		gbc_ch_xxxhdpi.insets = new Insets(0, 0, 5, 5);
+		gbc_ch_xxxhdpi.gridx = 0;
+		gbc_ch_xxxhdpi.gridy =5;
+		panel.add(ch_xxxhdpi, gbc_ch_xxxhdpi);
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder("Options"));
@@ -207,6 +218,8 @@ public class ResizerFrame extends JFrame {
 		comboBoxItems.add("hdpi");
 		comboBoxItems.add("xhdpi");
 		comboBoxItems.add("xxhdpi");
+		comboBoxItems.add("xxxhdpi");
+		
 		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
 				comboBoxItems);
 		inputDensity = new JComboBox<String>(model);
