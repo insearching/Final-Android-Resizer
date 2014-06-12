@@ -182,7 +182,7 @@ public class ResizerFrame extends JFrame {
 		btnBrowse = new JButton("Browse");
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser j = new JFileChooser();
+				JFileChooser j = new JFileChooser("D:/AndroidStudio");
 				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				Integer returnVal = j.showOpenDialog(btnBrowse);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -283,7 +283,7 @@ public class ResizerFrame extends JFrame {
 								lblDragDrop.setText(lblDragDrop.getText() + ".");
 							}
 						}
-						lblDragDrop.setText("Done! Gimme some more...");
+						lblDragDrop.setText("Done! Give me some more...");
 					}
 				});
 				t.start();
