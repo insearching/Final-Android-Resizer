@@ -45,8 +45,8 @@ public class ImageProcessor {
 		String finalPath=resDirectory.getAbsolutePath() + "/drawable-"	+ resFolder + "/" + f.getName();
 		
 		File destFile=new File(finalPath);
-		if(destFile.exists())
-			throw new FileAlreadyExistsException();
+//		if(destFile.exists())
+//			throw new FileAlreadyExistsException();
 		
 		destFile.getParentFile().mkdirs();
 		
