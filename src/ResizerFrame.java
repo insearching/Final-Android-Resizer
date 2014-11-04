@@ -65,6 +65,8 @@ public class ResizerFrame extends JFrame {
 				try {
 					ResizerFrame frame = new ResizerFrame();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setTitle("Android Final Resizer");
 					frame.setMinimumSize(new Dimension(640, 480));
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,12 +96,13 @@ public class ResizerFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder("Export"));
 		contentPane.add(panel, BorderLayout.WEST);
+		
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 70, 0 };
+		gbl_panel.columnWidths = new int[] { 120, 0 };
 		gbl_panel.rowHeights = new int[] { 23, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0 };
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -182,17 +185,18 @@ public class ResizerFrame extends JFrame {
 		btnBrowse = new JButton("Browse");
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser j = new JFileChooser();
-				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				Integer returnVal = j.showOpenDialog(btnBrowse);
+				JFileChooser fileChooser = new JFileChooser("D:\\");
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				Integer returnVal = fileChooser.showOpenDialog(btnBrowse);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					resFile = j.getSelectedFile();
+					resFile = fileChooser.getSelectedFile();
 					lblNoDirectorySelected.setText(resFile.getAbsolutePath());
 					pack();
 				}
 			}
 		});
 		GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
+		gbc_btnBrowse.anchor = GridBagConstraints.WEST;
 		gbc_btnBrowse.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBrowse.gridx = 1;
 		gbc_btnBrowse.gridy = 0;
@@ -201,7 +205,7 @@ public class ResizerFrame extends JFrame {
 		lblNoDirectorySelected = new JLabel("No directory selected yet");
 		GridBagConstraints gbc_lblNoDirectorySelected = new GridBagConstraints();
 		gbc_lblNoDirectorySelected.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNoDirectorySelected.gridx = 2;
+		gbc_lblNoDirectorySelected.gridx = 1;
 		gbc_lblNoDirectorySelected.gridy = 0;
 		panel_1.add(lblNoDirectorySelected, gbc_lblNoDirectorySelected);
 
