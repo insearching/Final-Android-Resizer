@@ -284,6 +284,10 @@ public class ResizerFrame extends JFrame {
 									e.printStackTrace();
 									break;
 								}
+								catch (RuntimeException e)  {
+									showError(files[i].getName() + " was wrong. " + e.getMessage());
+									e.printStackTrace();
+								}
 
 								lblDragDrop.setText(lblDragDrop.getText() + ".");
 							}
